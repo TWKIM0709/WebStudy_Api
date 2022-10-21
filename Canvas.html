@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Canvas</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- BootStraop -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- w3 css -->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+  <!-- Canvas -->
+  <link href="css/common.css" rel="stylesheet"/>
+  <link href="css/paint.css" rel="stylesheet"/>
+  <script src="js/functions.js"></script>
+  <script src="js/event_handler.js"></script>
+	<!-- sweetalert api -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- style -->
+  <style>
+    html,body {height:100%;margin:0px;padding:0px;overflow:hidden;font-family:sans-serif;}
+		.container-fluid{padding: 0px;}
+    .toptitle{height: 50px; color:#fff;font-size:2em;font-weight:bold; text-align: center;}
+    .mainbody{height:100%;}
+    .mapposition{display:block;position:absolute;top:53%;left:50%;transform:translate(-50%,-50%);width:90%;height:83%; background-color: #fff;}
+    .backbutton{float: left;margin-top: 5px;margin-left: 5px;}
+		#paint {border:5px solid black; border-radius: 30px;}
+  </style>
+</head>
+<!-- ------------------------ body ------------------------ -->
+<body class="container-fluid">
+  <div class="row-sm-1 w3-flat-wisteria toptitle">
+    <span style="position:relative; left:-40px;">Canvas</span>
+    <a href="MainAPI.html"><i class="w3-xxlarge fa fa-home backbutton "></i></a>
+    <a href="javascript:history.back()"><i class="w3-xxlarge fa fa-arrow-left backbutton"></i></a>
+    <!-- <span id="a">123</span>
+    <span id="b">123</span> -->
+  </div>
+  <div class="row-sm-11 w3-flat-amethyst mainbody">
+    <!-- main -->
+		<div id="paint" class="vertical mapposition">
+      <!-- -- sideMenu -- -->
+      <div id="palette" >
+        <form id="palette_form" onsubmit="return false;">
+          <dl class="object-setting">
+            <dt>모양</dt>
+            <dd class="object-shape">
+              <input type="radio" id="shape_circle" name="shape" value="circle" checked>
+              <label for="shape_circle">●</label>
+              <input type="radio" id="shape_rect" name="shape" value="rect">
+              <label for="shape_rect">■</label>
+              <input type="radio" id="shape_text" name="shape" value="text" onchange="size_height.value=18; font_size.value=15; font_black.checked=true; bg_white.checked=true;">
+              <label for="shape_text">T</label>
+            </dd>
+            <dt>사이즈</dt>
+            <dd class="object-size">
+              <label for="size_width">W</label>
+              <input type="text" id="size_width" class="align-right" name="width"value="100"><a>px</a><br>
+            </dd>
+            <dd class="object-size">
+              <label for="size_height">H</label>
+              <input type="text" id="size_height" class="align-right" name="height" value="100"><a>px</a>
+            </dd>
+            <dt>글자 크기</dt>
+            <dd class="object-size">
+              <label for="size_font">Font</label>
+              <input type="text" id="size_font" class="align-right" name="font_size"value="32"><a>px</a><br>
+            </dd>
+            <dt>배경 색상</dt>
+            <dd class="object-color bg-color">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input type="radio" id="bg_black" name="bg_color" value="bg-black" checked>
+                      <label for="bg_black" class="bg-black black">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="bg_white" name="bg_color" value="bg-white">
+                      <label for="bg_white" class="bg-white white">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="bg_blue" name="bg_color" value="bg-blue">
+                      <label for="bg_blue" class="bg-blue blue">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="bg_pink" name="bg_color" value="bg-pink">
+                      <label for="bg_pink" class="bg-pink pink">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="bg_green" name="bg_color" value="bg-green">
+                      <label for="bg_green" class="bg-green green">■</label>
+                    </td>
+                  </tr>
+                </tbody>              
+              </table>
+            </dd>
+            <dt>글자 색상</dt>
+            <dd class="object-color font-color">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input type="radio" id="font_black" name="font_color" value="black" checked>
+                      <label for="font_black" class="bg-black black">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="font_white" name="font_color" value="white">
+                      <label for="font_white" class="bg-white white">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="font_blue" name="font_color" value="blue">
+                      <label for="font_blue" class="bg-blue blue">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="font_pink" name="font_color" value="pink">
+                      <label for="font_pink" class="bg-pink pink">■</label>
+                    </td>
+                    <td>
+                      <input type="radio" id="font_green" name="font_color" value="green">
+                      <label for="font_green" class="bg-green green">■</label>
+                    </td>
+                  </tr>
+                </tbody>              
+              </table>
+            </dd>
+            <dt>투명도</dt>
+            <dd class="object-opacity"><input type="text" id="opacity" name="opacity" value="100" class="align-right" disabled>%</dd>
+            <dd><input type="range" name="opacity_slider" min="1" max="100" value="100" onchange="opacity.value=this.value"></dd>
+          </dl>
+          <div class="buttons align-right">
+            <button id="create_object" class="btn btn-secondary">생성</button>
+          </div>
+        </form>
+      </div>
+      <!-- -- sideMenu -- -->
+      <!-- -- Canvas -- -->
+      <div id="canvas">
+        <div class="wrapper "></div>
+      </div>
+      <!-- -- Canvas -- -->
+    </div>
+  <script src="js/common.js"></script>
+  </div>
+</body>
+<script type="text/javascript">
+  window.addEventListener('load', (event) => {
+      swal("사용법", "원하는 도형, 색, 크기를 정하고 생성버튼으로 생성합니다.\n생성된 도형은 더블클릭으로 지울 수 있습니다.");
+  });
+</script>
+<!-- ------------------------ body ------------------------ -->
+</html>
